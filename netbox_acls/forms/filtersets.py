@@ -94,6 +94,7 @@ class AccessListFilterForm(NetBoxModelFilterSetForm):
                 "site_group",
                 "site",
                 "device",
+                "type",
                 "virtual_chassis",
                 "virtual_machine",
             ),
