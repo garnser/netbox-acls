@@ -129,7 +129,7 @@ class AccessListForm(NetBoxModelForm):
             "virtual_machine",
             "virtual_chassis",
             "name",
-            "acl_type",
+            "type",
             "default_action",
             "comments",
             "tags",
@@ -137,7 +137,7 @@ class AccessListForm(NetBoxModelForm):
         help_texts = {
             "default_action": "The default behavior of the ACL.",
             "name": "The name uniqueness per device is case insensitive.",
-            "acl_type": mark_safe(
+            "type": mark_safe(
                 "<b>*Note:</b> CANNOT be changed if ACL Rules are assoicated to this Access List.",
             ),
         }
@@ -184,7 +184,7 @@ class AccessListForm(NetBoxModelForm):
         if self.errors.get("name"):
             return cleaned_data
         name = cleaned_data.get("name")
-        acl_type = cleaned_data.get("acl_type")
+        acl_type = cleaned_data.get("type")
         device = cleaned_data.get("device")
         virtual_chassis = cleaned_data.get("virtual_chassis")
         virtual_machine = cleaned_data.get("virtual_machine")
@@ -439,7 +439,7 @@ class ACLStandardRuleForm(NetBoxModelForm):
     access_list = DynamicModelChoiceField(
         queryset=AccessList.objects.all(),
         query_params={
-            "acl_type": ACLTypeChoices.TYPE_STANDARD,
+            "type": ACLTypeChoices.TYPE_STANDARD,
         },
         help_text=mark_safe(
             "<b>*Note:</b> This field will only display Standard ACLs.",
@@ -517,7 +517,7 @@ class ACLExtendedRuleForm(NetBoxModelForm):
     access_list = DynamicModelChoiceField(
         queryset=AccessList.objects.all(),
         query_params={
-            "acl_type": ACLTypeChoices.TYPE_EXTENDED,
+            "type": ACLTypeChoices.TYPE_EXTENDED,
         },
         help_text=mark_safe(
             "<b>*Note:</b> This field will only display Extended ACLs.",

@@ -86,7 +86,7 @@ class ACLStandardRule(ACLRule):
         on_delete=models.CASCADE,
         to=AccessList,
         verbose_name="Standard Access List",
-        limit_choices_to={"acl_type": ACLTypeChoices.TYPE_STANDARD},
+        limit_choices_to={"type": ACLTypeChoices.TYPE_STANDARD},
         related_name="aclstandardrules",
     )
 
@@ -123,7 +123,7 @@ class ACLExtendedRule(ACLRule):
         on_delete=models.CASCADE,
         to=AccessList,
         verbose_name="Extended Access List",
-        limit_choices_to={"acl_type": "extended"},
+        limit_choices_to={"type": "extended"},
         related_name="aclextendedrules",
     )
     source_ports = ArrayField(

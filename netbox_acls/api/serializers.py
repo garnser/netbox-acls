@@ -66,7 +66,7 @@ class AccessListSerializer(NetBoxModelSerializer):
             "assigned_object_type",
             "assigned_object_id",
             "assigned_object",
-            "acl_type",
+            "type",
             "default_action",
             "comments",
             "tags",
@@ -94,8 +94,8 @@ class AccessListSerializer(NetBoxModelSerializer):
         error_message = {}
 
         # Check if Access List has no existing rules before change the Access List's type.
-        if self.instance and self.instance.type != data.get("acl_type") and self.instance.rule_count > 0:
-            error_message["acl_type"] = [
+        if self.instance and self.instance.type != data.get("type") and self.instance.rule_count > 0:
+            error_message["type"] = [
                 "This ACL has ACL rules associated, CANNOT change ACL type.",
             ]
 

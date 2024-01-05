@@ -74,7 +74,7 @@ class AccessListFilterForm(NetBoxModelFilterSetForm):
         queryset=VirtualChassis.objects.all(),
         required=False,
     )
-    acl_type = django_filters.MultipleChoiceFilter(
+    type = django_filters.MultipleChoiceFilter(
         choices=add_blank_choice(ACLTypeChoices),
         required=False,
     )
@@ -98,7 +98,7 @@ class AccessListFilterForm(NetBoxModelFilterSetForm):
                 "virtual_machine",
             ),
         ),
-        ("ACL Details", ("acl_type", "default_action")),
+        ("ACL Details", ("type", "default_action")),
     )
 
 

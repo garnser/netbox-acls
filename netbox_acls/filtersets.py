@@ -71,7 +71,7 @@ class AccessListFilterSet(NetBoxModelFilterSet):
             "virtual_chassis_id",
             "virtual_machine",
             "virtual_machine_id",
-            "acl_type",
+            "type",
             "default_action",
             "comments",
         )
