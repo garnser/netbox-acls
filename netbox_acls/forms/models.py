@@ -2,12 +2,12 @@
 Defines each django model's GUI form to add or edit objects for each django model.
 """
 
-from dcim.models import Device, Interface, Region, Site, SiteGroup, VirtualChassis
+from dcim.models import Device, Interface, Region, Site, SiteGroup, VirtualChassis, DeviceRole, Platform
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from ipam.models import Prefix
-from extras.models import Tag, Role, Platform
+from extras.models import Tag
 from netbox.forms import NetBoxModelForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField
 from virtualization.models import (
@@ -65,7 +65,7 @@ class AccessListForm(NetBoxModelForm):
 
     # Roles selector
     roles = DynamicModelMultipleChoiceField(
-        queryset=Role.objects.all(),
+        queryset=DeviceRole.objects.all(),
         required=False,
         label="Roles",
     )
