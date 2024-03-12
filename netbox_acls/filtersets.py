@@ -23,6 +23,7 @@ class AccessListFilterSet(NetBoxModelFilterSet):
     Define the filter set for the django model AccessList.
     """
 
+    print(Platform.objects.all())
     device_platform = django_filters.ModelMultipleChoiceFilter(
         field_name="platform__name",
         queryset=Platform.objects.all(),
