@@ -57,21 +57,21 @@ class AccessListForm(NetBoxModelForm):
     """
 
     # Tags selector
-    tags = DynamicModelMultipleChoiceField(
+    tags = DynamicModelChoiceField(
         queryset=Tag.objects.all(),
         required=False,
         label="Tags",
     )
 
     # Roles selector
-    roles = DynamicModelMultipleChoiceField(
+    roles = DynamicModelChoiceField(
         queryset=DeviceRole.objects.all(),
         required=False,
         label="Roles",
     )
 
     # Platforms selector
-    platforms = DynamicModelMultipleChoiceField(
+    platforms = DynamicModelChoiceField(
         queryset=Platform.objects.all(),
         required=False,
         label="Platforms",
