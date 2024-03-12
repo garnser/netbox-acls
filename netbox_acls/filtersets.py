@@ -23,19 +23,19 @@ class AccessListFilterSet(NetBoxModelFilterSet):
     Define the filter set for the django model AccessList.
     """
 
-    device = django_filters.ModelMultipleChoiceFilter(
+    device_platform = django_filters.ModelMultipleChoiceFilter(
         field_name="platform__name",
         queryset=Platform.objects.all(),
         to_field_name="name",
         label="Platform (name)",
     )
-    device = django_filters.ModelMultipleChoiceFilter(
+    device_role = django_filters.ModelMultipleChoiceFilter(
         field_name="role__name",
         queryset=DeviceRole.objects.all(),
         to_field_name="name",
         label="Role (name)",
     )
-    device = django_filters.ModelMultipleChoiceFilter(
+    extras_tag = django_filters.ModelMultipleChoiceFilter(
         field_name="tag__name",
         queryset=Tag.objects.all(),
         to_field_name="name",
