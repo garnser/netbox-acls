@@ -26,18 +26,21 @@ class AccessListFilterSet(NetBoxModelFilterSet):
     device_platform = django_filters.ModelMultipleChoiceFilter(
         field_name="platform__name",
         queryset=Platform.objects.all(),
+        print(queryset)
         to_field_name="name",
         label="Platform (name)",
     )
     device_role = django_filters.ModelMultipleChoiceFilter(
         field_name="role__name",
         queryset=DeviceRole.objects.all(),
+        print(queryset)
         to_field_name="name",
         label="Role (name)",
     )
     extras_tag = django_filters.ModelMultipleChoiceFilter(
         field_name="tag__name",
         queryset=Tag.objects.all(),
+        print(queryset)
         to_field_name="name",
         label="Tag (name)",
     )
