@@ -181,21 +181,21 @@ GenericRelation(
     content_type_field="assigned_object_type",
     object_id_field="assigned_object_id",
     related_query_name="platforms",
-).contribute_to_class(Device, "accesslists")
+).contribute_to_class(Platform, "accesslists")
 
 GenericRelation(
     to=AccessList,
     content_type_field="assigned_object_type",
     object_id_field="assigned_object_id",
     related_query_name="tags",
-).contribute_to_class(Device, "accesslists")
+).contribute_to_class(Tag, "accesslists")
 
 GenericRelation(
     to=AccessList,
     content_type_field="assigned_object_type",
     object_id_field="assigned_object_id",
     related_query_name="roles",
-).contribute_to_class(Device, "accesslists")
+).contribute_to_class(DeviceRole, "accesslists")
 
 GenericRelation(
     to=AccessList,
