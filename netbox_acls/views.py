@@ -3,7 +3,7 @@ Defines the business logic for the plugin.
 Specifically, all the various interactions with a client.
 """
 
-from dcim.models import Device, Interface, VirtualChassis
+from dcim.models import Device, Interface, VirtualChassis, DeviceRole, Platform
 from django.db.models import Count
 from netbox.views import generic
 from utilities.views import ViewTab, register_model_view
