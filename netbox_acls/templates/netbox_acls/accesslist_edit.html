@@ -55,9 +55,48 @@
                     Virtual Machine
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button
+                    role="tab"
+                    type="button"
+                    id="role_tab"
+                    data-bs-toggle="tab"
+                    class="nav-link {% if form.initial.role %}active{% endif %}"
+                    data-bs-target="#role"
+                    aria-controls="role"
+                >
+                    Role
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button
+                    role="tab"
+                    type="button"
+                    id="platform_tab"
+                    data-bs-toggle="tab"
+                    class="nav-link {% if form.initial.platform %}active{% endif %}"
+                    data-bs-target="#platform"
+                    aria-controls="platform"
+                >
+                    Platform
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button
+                    role="tab"
+                    type="button"
+                    id="tag_tab"
+                    data-bs-toggle="tab"
+                    class="nav-link {% if form.initial.tag %}active{% endif %}"
+                    data-bs-target="#tag"
+                    aria-controls="tag"
+                >
+                    Tag
+                </button>
+            </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane{% if not form.initial.virtual_chassis and not form.initial.virtualmachine %} active{% endif %}" id="device">
+            <div class="tab-pane{% if not form.initial.virtual_chassis and not form.initial.virtualmachine and not form.initial.platform and not form.initial.role and not form.initial.tag %} active{% endif %}" id="device">
                 {% render_field form.region %}
                 {% render_field form.site_group %}
                 {% render_field form.site %}
@@ -72,6 +111,15 @@
                 {% render_field form.cluster %}
                 {% render_field form.virtual_machine %}
             </div>
+            <div class="tab-pane{% if form.initial.platform %} active{% endif %}" id="platform">
+              {% render_field form.platform %}
+          </div>
+            <div class="tab-pane{% if form.initial.role %} active{% endif %}" id="role">
+              {% render_field form.role %}
+          </div>
+            <div class="tab-pane{% if form.initial.tag %} active{% endif %}" id="tag">
+              {% render_field form.tag %}
+          </div>
     </div>
 </div>
 <div class="field-group">
