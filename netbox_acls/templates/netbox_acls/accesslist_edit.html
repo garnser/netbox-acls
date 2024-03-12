@@ -22,7 +22,7 @@
                     type="button"
                     id="device_tab"
                     data-bs-toggle="tab"
-                    class="nav-link {% if not form.initial.virtual_chassis and not form.initial.virtual_machine %}active{% endif %}"
+                    class="nav-link {% if not form.initial.virtual_chassis and not form.initial.virtual_machine and not form.initial.platform and not form.initial.role and not form.initial.tags %}active{% endif %}"
                     data-bs-target="#device"
                     aria-controls="device"
                 >
@@ -85,18 +85,18 @@
                 <button
                     role="tab"
                     type="button"
-                    id="tag_tab"
+                    id="tags_tab"
                     data-bs-toggle="tab"
-                    class="nav-link {% if form.initial.tag %}active{% endif %}"
-                    data-bs-target="#tag"
-                    aria-controls="tag"
+                    class="nav-link {% if form.initial.tags %}active{% endif %}"
+                    data-bs-target="#tags"
+                    aria-controls="tags"
                 >
                     Tag
                 </button>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane{% if not form.initial.virtual_chassis and not form.initial.virtualmachine and not form.initial.platform and not form.initial.role and not form.initial.tag %} active{% endif %}" id="device">
+            <div class="tab-pane{% if not form.initial.virtual_chassis and not form.initial.virtualmachine and not form.initial.platform and not form.initial.role and not form.initial.tags %} active{% endif %}" id="device">
                 {% render_field form.region %}
                 {% render_field form.site_group %}
                 {% render_field form.site %}
@@ -117,8 +117,8 @@
             <div class="tab-pane{% if form.initial.role %} active{% endif %}" id="role">
               {% render_field form.role %}
           </div>
-            <div class="tab-pane{% if form.initial.tag %} active{% endif %}" id="tag">
-              {% render_field form.tag %}
+            <div class="tab-pane{% if form.initial.tags %} active{% endif %}" id="tags">
+              {% render_field form.tags %}
           </div>
     </div>
 </div>

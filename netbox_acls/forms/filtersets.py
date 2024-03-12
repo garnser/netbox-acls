@@ -2,9 +2,10 @@
 Defines each django model's GUI filter/search options.
 """
 
-from dcim.models import Device, Interface, Region, Site, SiteGroup, VirtualChassis
+from dcim.models import Device, Interface, Region, Site, SiteGroup, VirtualChassis, Platform, DeviceRole
 from django import forms
 from ipam.models import Prefix
+from extras.models import Tag
 from netbox.forms import NetBoxModelFilterSetForm
 from utilities.forms.fields import (
     DynamicModelChoiceField,
@@ -42,6 +43,28 @@ class AccessListFilterForm(NetBoxModelFilterSetForm):
     """
 
     model = AccessList
+
+    # Tags selector
+    tags = DynamicModelChoiceField(
+        queryset=Tag.objects.all(),
+        required=False,
+        label="Tags",
+    )
+
+    # Roles selector
+    roles = DynamicModelChoiceField(
+        queryset=DeviceRole.objects.all(),
+        required=False,
+        label="Roles",
+    )
+
+    # Platforms selector
+    platforms = DynamicModelChoiceField(
+        queryset=Platform.objects.all(),
+        required=False,
+        label="Platforms",
+    )
+
     region = DynamicModelChoiceField(
         queryset=Region.objects.all(),
         required=False,
@@ -96,6 +119,9 @@ class AccessListFilterForm(NetBoxModelFilterSetForm):
                 "type",
                 "virtual_chassis",
                 "virtual_machine",
+                "platform",
+                "role",
+                "tags"
             ),
         ),
         ("ACL Details", ("type", "default_action")),

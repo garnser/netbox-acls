@@ -2,10 +2,11 @@
 Define the django models for this plugin.
 """
 
-from dcim.models import Device, Interface, VirtualChassis
+from dcim.models import Device, Interface, VirtualChassis, DeviceRole, Platform
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import RegexValidator
+from extras.models import Tag
 from django.db import models
 from django.urls import reverse
 from netbox.models import NetBoxModel
