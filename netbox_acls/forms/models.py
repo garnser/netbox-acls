@@ -7,7 +7,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 from ipam.models import Prefix
+<<<<<<< HEAD
 from extras.models import Tag
+=======
+>>>>>>> parent of 6d273d0... Add support for different assignment objects
 from netbox.forms import NetBoxModelForm
 from utilities.forms.fields import CommentField, DynamicModelChoiceField
 from virtualization.models import (
@@ -56,6 +59,7 @@ class AccessListForm(NetBoxModelForm):
     Requires a device, a name, a type, and a default_action.
     """
 
+<<<<<<< HEAD
     # Tags selector
     tags = DynamicModelChoiceField(
         queryset=Tag.objects.all(),
@@ -77,6 +81,8 @@ class AccessListForm(NetBoxModelForm):
         label="Platforms",
     )
 
+=======
+>>>>>>> parent of 6d273d0... Add support for different assignment objects
     # Device selector
     region = DynamicModelChoiceField(
         queryset=Region.objects.all(),
@@ -245,30 +251,11 @@ class AccessListForm(NetBoxModelForm):
         ):
             raise ValidationError({"type": ["This ACL has ACL rules associated, CANNOT change ACL type."]})
 
-        # Validate tags, roles, and platforms
-        tags = self.cleaned_data.get("tags")
-        roles = self.cleaned_data.get("roles")
-        platforms = self.cleaned_data.get("platforms")
-
-        if not any([tags, roles, platforms]):
-            raise ValidationError({"__all__": "At least one of Tags, Roles, or Platforms must be selected."})
-
     def save(self, *args, **kwargs):
         # Set assigned object
         self.instance.assigned_object = (
             self.cleaned_data.get("device") or self.cleaned_data.get("virtual_chassis") or self.cleaned_data.get("virtual_machine")
         )
-
-        # Set tags, roles, and platforms if specified
-        self.instance.tags.set(tags or [])
-        self.instance.roles.set(roles or [])
-        self.instance.platforms.set(platforms or [])
-
-        # Clear other assignments if tags, roles, or platforms are specified
-        if any([tags, roles, platforms]):
-            self.instance.device = None
-            self.instance.virtual_machine = None
-            self.instance.virtual_chassis = None
 
         return super().save(*args, **kwargs)
 
