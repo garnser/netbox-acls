@@ -4,8 +4,8 @@ Defines each django model's GUI form to add or edit objects for each django mode
 
 from dcim.models import Device, Interface, Region, Site, SiteGroup, VirtualChassis
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
+from django.core.exceptions import ValidationError
 from ipam.models import Prefix
 from extras.models import Tag, Role, Platform
 from netbox.forms import NetBoxModelForm
@@ -214,13 +214,15 @@ class AccessListForm(NetBoxModelForm):
 
         # Check if more than one host type selected.
         if (device and virtual_chassis) or (device and virtual_machine) or (virtual_chassis and virtual_machine):
-            raise ValidationError(
-                {"__all__": "Access Lists must be assigned to one host at a time. Either a device, virtual chassis or virtual machine."},
-            )
+            raise ValidationError({
+                '__all__': "Access Lists must be assigned to one host at a time. Either a device, virtual chassis or virtual machine."
+            })
 
         # Check if no hosts selected.
         if not device and not virtual_chassis and not virtual_machine:
-            raise ValidationError({"__all__": "Access Lists must be assigned to a device, virtual chassis or virtual machine."})
+            raise ValidationError({
+                '__all__': "Access Lists must be assigned to a device, virtual chassis or virtual machine."
+            })
 
         existing_acls = None
         if device:
@@ -236,14 +238,19 @@ class AccessListForm(NetBoxModelForm):
         # Check if duplicate entry.
         if ("name" in self.changed_data or host_type in self.changed_data) and existing_acls:
             error_same_acl_name = "An ACL with this name is already associated to this host."
-            raise ValidationError({host_type: [error_same_acl_name], "name": [error_same_acl_name]})
+            raise ValidationError({
+                host_type: [error_same_acl_name],
+                "name": [error_same_acl_name]
+            })
 
         # Check if Access List has no existing rules before change the Access List's type.
         if self.instance.pk and (
             (acl_type == ACLTypeChoices.TYPE_EXTENDED and self.instance.aclstandardrules.exists())
             or (acl_type == ACLTypeChoices.TYPE_STANDARD and self.instance.aclextendedrules.exists())
         ):
-            raise ValidationError({"type": ["This ACL has ACL rules associated, CANNOT change ACL type."]})
+            raise ValidationError({
+                'type': ["This ACL has ACL rules associated, CANNOT change ACL type."]
+            })
 
         # Validate tags, roles, and platforms
         tags = self.cleaned_data.get("tags")
@@ -515,9 +522,9 @@ class ACLStandardRuleForm(NetBoxModelForm):
         cleaned_data = self.cleaned_data
         error_message = {}
 
-        action = cleaned_data.get("action")
-        remark = cleaned_data.get("remark")
-        source_prefix = cleaned_data.get("source_prefix")
+        action = cleaned_data.get('action')
+        remark = cleaned_data.get('remark')
+        source_prefix = cleaned_data.get('source_prefix')
 
         if action == "remark":
             # Check if action set to remark, but no remark set.
@@ -532,6 +539,7 @@ class ACLStandardRuleForm(NetBoxModelForm):
 
         if error_message:
             raise ValidationError(error_message)
+
 
 
 class ACLExtendedRuleForm(NetBoxModelForm):
@@ -622,13 +630,13 @@ class ACLExtendedRuleForm(NetBoxModelForm):
         cleaned_data = self.cleaned_data
         error_message = {}
 
-        action = cleaned_data.get("action")
-        remark = cleaned_data.get("remark")
-        source_prefix = cleaned_data.get("source_prefix")
-        source_ports = cleaned_data.get("source_ports")
-        destination_prefix = cleaned_data.get("destination_prefix")
-        destination_ports = cleaned_data.get("destination_ports")
-        protocol = cleaned_data.get("protocol")
+        action = cleaned_data.get('action')
+        remark = cleaned_data.get('remark')
+        source_prefix = cleaned_data.get('source_prefix')
+        source_ports = cleaned_data.get('source_ports')
+        destination_prefix = cleaned_data.get('destination_prefix')
+        destination_ports = cleaned_data.get('destination_ports')
+        protocol = cleaned_data.get('protocol')
 
         if action == "remark":
             if not remark:
